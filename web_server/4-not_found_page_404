@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Configures Nginx with a custom 404 error page containing 'Ceci n'est pas une page'
+# Configures Nginx with a custom 404 error page containing "Ceci n'est pas une page"
 
 apt-get update -y
 apt-get install nginx -y
 
-# Create the custom 404 error page content
+# Create the custom 404 HTML file
 echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
 
-# Configure Nginx to use the custom 404 page and return status 404
-CFG_FILE="/etc/nginx/sites-available/default"
-sudo sed -i '/listen 80 default_server;/a \    error_page 404 /custom_404.html;\n    location = /custom_404.html {\n        internal;\n    }' "$CFG_FILE"
+# Configure Nginx to use the custom 404 page and return 404 status
+sed -i "/server_name _;/a \    error_page 404 /custom_404.html;\n    location = /custom_404.html {\n        internal;\n    }" /etc/nginx/sites-enabled/default
 
+# Restart Nginx without systemctl
 service nginx restart
