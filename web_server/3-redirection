@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# Configures Nginx with a 301 Moved Permanently redirection for /redirect_me to a YouTube video
+# Configures Nginx with a 301 redirect for /redirect_me
 
 apt-get update -y
-apt-get install nginx -y
+apt-get install -y nginx
 
-# Add the 301 redirection block inside the default server block using sed
-sed -i "/server_name _;/a \    location /redirect_me {\n        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n    }" /etc/nginx/sites-enabled/default
+echo "Holberton School" > /var/www/html/index.html
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
 
-# Restart Nginx without systemctl
+sed -i '/server_name _;/a \    rewrite ^/redirect_me/?$ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+
 service nginx restart
