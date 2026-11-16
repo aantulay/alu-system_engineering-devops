@@ -1,6 +1,6 @@
-# Fix WordPress database connection error in wp-config.php by correcting the database password or setting
+# Fixes a typo in wp-settings.php causing Apache 500 Internal Server Error
 
 exec { 'fix-wordpress':
-  command => 'sed -i "s/error_password/correct_password/g" /var/www/html/wp-config.php',
+  command => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
   path    => ['/bin', '/usr/bin'],
 }
