@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Installs Apache, configures index.html to display "Hello Holberton", and starts Apache
+
+apt-get update -y
+apt-get install -y apache2
+echo "Hello Holberton" > /var/www/html/index.html
+service apache2 start
