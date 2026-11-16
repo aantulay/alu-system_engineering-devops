@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Configures UFW firewall to block all incoming traffic except ports 22, 80, and 443
+
+# Update package lists and install ufw non-interactively
+apt-get update -y
+apt-get install -y ufw
+
+# Set default policies to deny all incoming and allow all outgoing traffic
+ufw default deny incoming
+ufw default allow outgoing
+
+# Allow incoming traffic on ports 22 (SSH), 80 (HTTP), and 443 (HTTPS)
+ufw allow 22/tcp
+ufw allow 80/tcp
+ufw allow 443/tcp
+
+# Enable the firewall without prompting for confirmation
+ufw --force enable
