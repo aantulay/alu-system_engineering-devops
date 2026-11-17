@@ -4,11 +4,7 @@
 apt-get update -y
 apt-get install -y nginx
 
-# Create the index page with the required string
 echo "Holberton School" > /var/www/html/index.html
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
 
-# Ensure Nginx site configuration explicitly points to /var/www/html
-sed -i 's|root /var/www/html;|root /var/www/html;\n\tindex index.html index.htm index.nginx-debian.html;|g' /etc/nginx/sites-enabled/default
-
-# Restart Nginx without systemctl
 service nginx restart
